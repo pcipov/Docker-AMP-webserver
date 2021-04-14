@@ -1,0 +1,30 @@
+php:
+  build: .
+  ports:
+    - "80:80"
+    - "443:443"
+  volumes:
+    - ../:/var/www/html
+  links:
+    - db
+
+db:
+  image: mysql:5.7
+  volumes:
+    - ./db/:/var/lib/mysql
+  environment:
+    - MYSQL_ROOT_PASSWORD=root
+  command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_general_ci']
+
+phpmyadmin:
+  image: phpmyadmin/phpmyadmin
+  ports:
+    - "8080:80"
+  environment:
+    UPLOAD_LIMIT: 128M
+    PMA_USER: root
+    PMA_PASSWORD: root
+  volumes:
+    - /sessions
+  links:
+    - db
