@@ -1,7 +1,7 @@
 php:
   build: .
   ports:
-    - "80:80"
+    - "8080:80"
     - "443:443"
   volumes:
     - ../:/var/www/html
@@ -19,7 +19,7 @@ db:
 phpmyadmin:
   image: phpmyadmin/phpmyadmin
   ports:
-    - "8080:80"
+    - "8081:80"
   environment:
     UPLOAD_LIMIT: 128M
     PMA_USER: root
